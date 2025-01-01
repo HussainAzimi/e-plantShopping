@@ -248,8 +248,19 @@ const handlePlantsClick = (e) => {
 };
 
    const handleContinueShopping = (e) => {
-    e.preventDefault();
+    if(e && typeof e.preventDefault === 'function'){
+      
+        e.preventDefault();
+    }
+   
     setShowCart(false);
+  };
+  const handleCheckoutShopping = (e) => {
+    if(e && typeof e.preventDefault === 'function'){
+      
+        e.preventDefault();
+    }
+    alert('Functionality to be added for future reference');
   };
 
   const handleAddToCart = (product) => {
@@ -300,7 +311,10 @@ const handlePlantsClick = (e) => {
         </div>
 
        ) :  (
-        <CartItem onContinueShopping={handleContinueShopping}/>
+        <CartItem 
+        onContinueShopping={handleContinueShopping}
+        onCheckoutShopping={handleCheckoutShopping}
+        />
         )}
        </div>
   );
