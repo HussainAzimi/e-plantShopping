@@ -9,8 +9,26 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
+
+    if(cart.length === 0){
+      return '0.00';   //if no items in the cart
+    }
     
- 
+       return cart.reduce((total, item) => {
+        console.log("cost before float:", item.cost);
+
+        const cost = parseFloat(item.cost.replace(/[^0-9.-]+/g, ""));  // remove the $ symble from cost value
+        console.log("cost after float:", cost);
+        const quantity = parseFloat(item.quantity, 10);
+        
+
+        if(!isNaN(cost) && !isNaN(quantity)){
+          return total + (cost * quantity);
+        }else{
+          return total;
+        }
+        
+       }, 0).toFixed(2);
   };
 
   const handleContinueShopping = (e) => {
@@ -31,6 +49,12 @@ const CartItem = ({ onContinueShopping }) => {
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
+    const cost = parseFloat(item.cost.replace(/[^0-9.-]+/g, ""));
+    const quantity = parseFloat(cost.quantity, 10);
+    if(!isNaN(cost) && !isNaN(quantity)){
+      return (cost * quantity).toFixed(2);
+    }
+     return "0.00";
   };
 
   return (
