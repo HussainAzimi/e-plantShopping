@@ -58,11 +58,10 @@ const CartItem = ({ onContinueShopping, onCheckoutShopping }) => {
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
     const cost = parseFloat(item.cost.replace(/[^0-9.-]+/g, ""));
-    const quantity = parseFloat(cost.quantity, 10);
-    if(!isNaN(cost) && !isNaN(quantity)){
-      return (cost * quantity).toFixed(2);
-    }
-     return "0.00";
+    const quantity = item.quantity;
+
+    return (cost*quantity);
+        
   };
 
   return (
